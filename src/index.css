@@ -1,6 +1,12 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #123e68;
+  --color-primary-dark: #0a2a47;
+  --color-secondary: #0b7c86;
+  --color-accent: #f2b84b;
+  --color-bg-soft: #f5f7fb;
+}
 
 :root {
   --bg: #f5f7fb;
@@ -19,7 +25,8 @@
 }
 
 body {
-  @apply bg-[#f5f7fb] text-[#102033];
+  background-color: var(--color-bg-soft);
+  color: #102033;
   background:
     radial-gradient(circle at top left, rgba(11, 124, 134, .12), transparent 32rem),
     radial-gradient(circle at top right, rgba(242, 184, 75, .14), transparent 28rem),

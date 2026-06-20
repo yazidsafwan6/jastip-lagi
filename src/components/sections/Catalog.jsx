@@ -2,7 +2,7 @@ import { useContext, useState } from 'react';
 import { AppContext } from '../../context/AppContext';
 import ProductCard from '../ProductCard';
 import EmptyState from '../EmptyState';
-import { Search, SlidersHorizontal,   } from 'lucide-react';
+import { Search, SlidersHorizontal } from 'lucide-react';
 
 export default function Catalog() {
   const { products, seedProducts } = useContext(AppContext);
