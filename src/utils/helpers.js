@@ -1,3 +1,10 @@
+import { clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs) {
+  return twMerge(clsx(inputs))
+}
+
 export function makeId(prefix) {
   const random = Math.random().toString(36).slice(2, 8).toUpperCase();
   const time = Date.now().toString(36).slice(-5).toUpperCase();

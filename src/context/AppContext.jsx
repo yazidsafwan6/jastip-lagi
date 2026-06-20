@@ -1,8 +1,8 @@
-import { createContext, useState } from 'react';
+import { useState } from 'react';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { makeId, rupiah, formatDate } from '../utils/helpers';
-
-export const AppContext = createContext();
+export { AppContext } from "./AppContextInstance";
+import { AppContext } from './AppContextInstance';
 
 const STORAGE_KEYS = {
   products: "beyazit_cargo_products_v1",
