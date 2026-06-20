@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import { AppContext } from '../../context/AppContext';
 import ProductCard from '../ProductCard';
 import EmptyState from '../EmptyState';
+import { Search, SlidersHorizontal,   } from 'lucide-react';
 
 export default function Catalog() {
   const { products, seedProducts } = useContext(AppContext);
@@ -37,41 +38,67 @@ export default function Catalog() {
   }
 
   return (
-    <section className="section active">
-      <div className="section-head">
+    <div className="py-6 space-y-8">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
         <div>
-          <h2>Katalog Jastip</h2>
-          <p>Pilih produk, filter kategori, lalu tambahkan ke keranjang.</p>
+          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight text-center sm:text-left">Katalog Premium</h2>
+          <p className="text-slate-500 font-medium mt-1 text-center sm:text-left">Pilih produk terbaik dan serahkan proses belanja kepada kami.</p>
         </div>
-        <button className="btn ghost" onClick={seedProducts}>Reset contoh produk</button>
+        <button onClick={seedProducts} className="text-sm font-bold text-slate-400 hover:text-primary transition-colors text-center sm:text-right">
+          Muat Ulang Contoh Produk
+        </button>
       </div>
-      <div className="toolbar">
-        <input
-          className="input"
-          placeholder="Cari produk, kota, kategori..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        <select className="select" value={category} onChange={(e) => setCategory(e.target.value)}>
-          {categories.map(cat => (
-            <option key={cat} value={cat === "Semua kategori" ? "all" : cat}>{cat}</option>
-          ))}
-        </select>
-        <select className="select" value={sort} onChange={(e) => setSort(e.target.value)}>
-          <option value="popular">Urut populer</option>
-          <option value="priceAsc">Harga termurah</option>
-          <option value="priceDesc">Harga termahal</option>
-          <option value="feeAsc">Fee termurah</option>
-          <option value="nameAsc">Nama A-Z</option>
-        </select>
+
+      <div className="bg-white rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/50 p-4 sm:p-6 lg:p-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
+          <div className="lg:col-span-6 relative group">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 group-focus-within:text-primary transition-colors" />
+            <input
+              className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-4 pl-12 pr-4 text-slate-900 font-bold focus:ring-4 focus:ring-primary/5 focus:border-primary outline-none transition-all placeholder:text-slate-300"
+              placeholder="Cari produk, kota, atau kategori..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          </div>
+
+          <div className="lg:col-span-3 relative">
+            <SlidersHorizontal className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <select
+              className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-4 pl-11 pr-4 text-slate-900 font-bold focus:ring-4 focus:ring-primary/5 outline-none transition-all appearance-none cursor-pointer"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              {categories.map(cat => (
+                <option key={cat} value={cat === "Semua kategori" ? "all" : cat}>{cat}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="lg:col-span-3">
+            <select
+              className="w-full bg-slate-50 border border-slate-100 rounded-2xl py-4 px-4 text-slate-900 font-bold focus:ring-4 focus:ring-primary/5 outline-none transition-all appearance-none cursor-pointer"
+              value={sort}
+              onChange={(e) => setSort(e.target.value)}
+            >
+              <option value="popular">Urut: Paling Populer</option>
+              <option value="priceAsc">Urut: Harga Termurah</option>
+              <option value="priceDesc">Urut: Harga Termahal</option>
+              <option value="feeAsc">Urut: Fee Termurah</option>
+              <option value="nameAsc">Urut: Nama A-Z</option>
+            </select>
+          </div>
+        </div>
       </div>
+
       {filtered.length === 0 ? (
-        <EmptyState icon="🔎" title="Produk tidak ditemukan" text="Coba ubah kata kunci atau filter kategori." />
+        <div className="bg-white rounded-[2.5rem] p-20 border border-dashed border-slate-200">
+          <EmptyState icon="🔎" title="Produk tidak ditemukan" text="Coba gunakan kata kunci lain atau periksa filter kategori kamu." />
+        </div>
       ) : (
-        <div className="grid">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
           {filtered.map(product => <ProductCard key={product.id} product={product} />)}
         </div>
       )}
-    </section>
+    </div>
   );
 }

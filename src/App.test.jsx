@@ -9,6 +9,6 @@ test('renders brand title', () => {
       <App />
     </AppProvider>
   )
-  const brandTitle = screen.getByText(/Beyazit Cargo/i)
-  expect(brandTitle).toBeInTheDocument()
+  const brandTitles = screen.getAllByText(/Beyazit Cargo/i)
+  expect(brandTitles.length).toBeGreaterThan(0)
 })
